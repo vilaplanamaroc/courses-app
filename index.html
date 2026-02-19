@@ -1,65 +1,82 @@
 <!doctype html>
 <html lang="fr">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Gestion Courses</title>
-<link rel="stylesheet" href="style.css">
-<script defer src="app.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Courses</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
+  <div class="bg"></div>
 
-<div class="bg"></div>
+  <header class="top">
+    <img class="hero" id="heroImg" src="course.jpg" alt="Illustration" />
+    <h1>COURSES</h1>
+    <p class="sub">Liste à faire • Achat • WhatsApp</p>
 
-<div class="app">
+    <div class="tabs">
+      <button class="tab active" data-tab="todo">🧾 Course à faire</button>
+      <button class="tab" data-tab="buy">🛒 Achat</button>
+    </div>
+  </header>
 
-<header>
-  <h1>🛒 Gestion des Courses</h1>
-</header>
+  <main class="wrap">
+    <!-- ===== ONGLET COURSE A FAIRE ===== -->
+    <section id="tab-todo" class="card tabpane active">
+      <div class="row2">
+        <div class="field">
+          <label>👤 Demandeur</label>
+          <input id="todo_name" type="text" placeholder="Ex: Soumia" />
+        </div>
+        <div class="field">
+          <label>📅 Date (optionnel)</label>
+          <input id="todo_date" type="date" />
+        </div>
+      </div>
 
-<div class="tabs">
-  <button id="tabCourse" class="active">📝 Course à faire</button>
-  <button id="tabAchat">💰 Mode Achat</button>
-</div>
+      <div id="todoCategories" class="cats"></div>
 
-<!-- COURSE -->
-<section id="courseSection" class="section active">
+      <div class="actions">
+        <button id="btnTodoCopy" class="btn ghost">Copier la liste</button>
+        <button id="btnTodoWhats" class="btn green">Envoyer sur WhatsApp</button>
+      </div>
 
-  <div class="banner">
-    <img src="course.jpg">
-  </div>
+      <div class="smallnote" id="todoStatus"></div>
+    </section>
 
-  <div id="courseList"></div>
+    <!-- ===== ONGLET ACHAT ===== -->
+    <section id="tab-buy" class="card tabpane">
+      <div class="row2">
+        <div class="field">
+          <label>📅 Date d’achat</label>
+          <input id="buy_date" type="date" />
+        </div>
+        <div class="field">
+          <label>📥 Liste reçue (coller ici)</label>
+          <textarea id="buy_received" rows="4" placeholder="Colle la liste WhatsApp ici (optionnel)"></textarea>
+        </div>
+      </div>
 
-  <button class="mainBtn" id="generateList">📤 Générer & Envoyer WhatsApp</button>
+      <div class="totals">
+        <div class="pill">Total estimé : <b id="buy_total">0</b> DH</div>
+        <button id="btnBuyClear" class="btn ghost small">Réinitialiser</button>
+      </div>
 
-</section>
+      <div id="buyCategories" class="cats"></div>
 
-<!-- ACHAT -->
-<section id="achatSection" class="section">
+      <div class="actions">
+        <button id="btnBuyCopy" class="btn ghost">Copier le résumé</button>
+        <button id="btnBuyWhats" class="btn green">Envoyer sur WhatsApp</button>
+      </div>
 
-  <div class="banner">
-    <img src="achat.jpg">
-  </div>
+      <div class="smallnote" id="buyStatus"></div>
+    </section>
+  </main>
 
-  <label>Date d'achat :</label>
-  <input type="date" id="achatDate">
+  <footer class="foot">
+    <span>Local • Privé • Pas de compte</span>
+  </footer>
 
-  <label>Liste reçue (coller ici) :</label>
-  <textarea id="listeRecue" placeholder="Coller la liste reçue ici..."></textarea>
-
-  <div id="achatList"></div>
-
-  <div class="totalBox">
-    Total : <span id="totalAmount">0</span> DH
-  </div>
-
-  <button class="mainBtn" id="finaliserAchat">✅ Finaliser</button>
-
-</section>
-
-</div>
-
+  <script src="app.js"></script>
 </body>
 </html>
