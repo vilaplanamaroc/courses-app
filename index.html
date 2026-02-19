@@ -3,98 +3,127 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b0f14" />
   <title>Courses</title>
+
+  <!-- PWA / iOS icon -->
+  <link rel="icon" href="icon-512.png">
+  <link rel="apple-touch-icon" href="icon-512.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <div class="app">
-    <header class="top">
-      <img id="headerImg" class="header-img" src="header-course.png" alt="Header" />
-      <div class="top-title">
-        <div class="brand">COURSES</div>
-        <div class="subtitle">Liste + Achat</div>
+  <div class="app" id="app">
+    <div class="topbar glass">
+      <div class="brand">
+        <div class="brand-title">COURSES</div>
+        <div class="brand-sub">Course à faire • Achat</div>
       </div>
 
-      <div class="tabs" role="tablist" aria-label="Modes">
-        <button id="tabCourse" class="tab active" type="button">🛒 Course à faire</button>
-        <button id="tabAchat" class="tab" type="button">💳 Achat</button>
+      <div class="tabs">
+        <button class="tab active" id="tabCourse" type="button">📝 Course</button>
+        <button class="tab" id="tabAchat" type="button">🛒 Achat</button>
       </div>
-    </header>
+    </div>
 
-    <main class="content">
-      <!-- ====== MODE COURSE ====== -->
-      <section id="screenCourse" class="screen">
-        <div class="card glass">
-          <div class="row2">
-            <div class="field">
-              <label>Nom (optionnel)</label>
-              <input id="courseName" type="text" placeholder="Soumia / Mohamed..." />
-            </div>
-            <div class="field">
-              <label>Date</label>
-              <input id="courseDate" type="date" />
-            </div>
+    <!-- ======= COURSE ======= -->
+    <section id="screenCourse" class="screen">
+      <div class="hero glass">
+        <img class="hero-img" src="header-course.png" alt="Course" />
+      </div>
+
+      <div class="card glass">
+        <div class="row2">
+          <div class="field">
+            <label>Nom</label>
+            <input id="c_nom" type="text" placeholder="Ex: Soumia" />
+          </div>
+          <div class="field">
+            <label>Date</label>
+            <input id="c_date" type="date" />
           </div>
         </div>
 
-        <div id="courseCategories"></div>
+        <div class="field">
+          <label>Remarque (optionnel)</label>
+          <input id="c_note" type="text" placeholder="Ex: prendre promo / marque précise..." />
+        </div>
+      </div>
 
+      <div id="courseCategories"></div>
+
+      <div class="card glass">
         <div class="actions">
           <button class="btn" id="btnCourseCopy" type="button">Copier la liste</button>
-          <button class="btn primary" id="btnCourseWhats" type="button">Envoyer WhatsApp</button>
+          <button class="btn primary" id="btnCourseWA" type="button">Envoyer sur WhatsApp</button>
         </div>
 
-        <div class="card glass">
-          <label>Résumé</label>
-          <textarea id="courseSummary" rows="7" readonly></textarea>
+        <div class="field">
+          <label>Résumé (modifiable)</label>
+          <textarea id="courseSummary" rows="8" placeholder="Le résumé apparaît ici…"></textarea>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- ====== MODE ACHAT ====== -->
-      <section id="screenAchat" class="screen hidden">
-        <div class="card glass">
-          <div class="row2">
-            <div class="field">
-              <label>Date d’achat</label>
-              <input id="achatDate" type="date" />
-            </div>
-            <div class="field">
-              <label>Liste reçue (coller ici)</label>
-              <textarea id="pasteList" rows="3" placeholder="Colle la liste WhatsApp ici (optionnel)"></textarea>
+    <!-- ======= ACHAT ======= -->
+    <section id="screenAchat" class="screen hidden">
+      <div class="hero glass">
+        <img class="hero-img" src="header-achat.png" alt="Achat" />
+      </div>
+
+      <div class="card glass">
+        <div class="row2">
+          <div class="field">
+            <label>Date d'achat</label>
+            <input id="a_date" type="date" />
+          </div>
+          <div class="field">
+            <label>Total (auto)</label>
+            <div class="total">
+              <span id="achatTotal">0</span>
+              <span class="muted">DH</span>
             </div>
           </div>
         </div>
 
-        <div id="achatCategories"></div>
+        <div class="field">
+          <label>Liste reçue (coller ici)</label>
+          <textarea id="listeRecue" rows="6" placeholder="Colle le message WhatsApp ici (ex: Lait : 2 / Tomates : 1kg ...)"></textarea>
+        </div>
 
         <div class="actions">
+          <button class="btn" id="btnParse" type="button">Pré-remplir depuis la liste</button>
+        </div>
+      </div>
+
+      <div id="achatCategories"></div>
+
+      <div class="card glass">
+        <div class="row2">
           <button class="btn" id="btnAchatCopy" type="button">Copier le résumé</button>
-          <button class="btn primary" id="btnAchatWhats" type="button">Envoyer WhatsApp</button>
-          <button class="btn" id="btnAchatPdf" type="button">Télécharger PDF</button>
+          <button class="btn primary" id="btnAchatPDF" type="button">Télécharger PDF</button>
         </div>
 
-        <div class="card glass">
-          <div class="row2">
-            <div>
-              <label>Total (DH)</label>
-              <div class="total" id="achatTotal">0</div>
-            </div>
-            <div>
-              <label>Résumé</label>
-              <textarea id="achatSummary" rows="8" readonly></textarea>
-            </div>
-          </div>
+        <div class="field">
+          <label>Résumé achat</label>
+          <textarea id="achatSummary" rows="10" placeholder="Le résumé apparaît ici…"></textarea>
         </div>
-      </section>
-    </main>
+      </div>
 
-    <footer class="foot">
-      <small>Local & privé (sur ton téléphone) • GitHub Pages</small>
-    </footer>
+      <div class="card glass">
+        <label>Historique des achats</label>
+        <div id="achatHistory" class="history"></div>
+      </div>
+    </section>
+
+    <div class="footer muted">
+      Astuce: si l’icône iPhone ne change pas, supprime l’ancienne icône et ré-ajoute.
+    </div>
   </div>
 
-  <!-- jsPDF (pour PDF achat) -->
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
